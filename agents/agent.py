@@ -1,3 +1,5 @@
+from models.conversation_model import ConversationModel
+
 class Agent:
     description = "Generic agent"
 
