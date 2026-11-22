@@ -1,6 +1,4 @@
-"""
-Contract for the conversation model
-"""
+"""Contract for the conversation model"""
 
 from typing import Protocol
 

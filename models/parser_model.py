@@ -1,6 +1,4 @@
-"""
-Contract for the parser model
-"""
+"""Contract for the parser model"""
 
 from typing import Any, Protocol
 
