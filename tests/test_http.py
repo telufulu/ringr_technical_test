@@ -1,4 +1,8 @@
-"""Tests for the simulated HTTP integration."""
+"""Tests for the simulated HTTP integration.
+
+Test cases follow the rules defined in the project design. The test code was
+generated with AI (see docs/ai_usage.md).
+"""
 
 import unittest
 

@@ -1,4 +1,8 @@
-"""Tests for AssistanceAgent."""
+"""Tests for AssistanceAgent.
+
+Test cases follow the conversations and rules defined in the project design.
+The test code was generated with AI (see docs/ai_usage.md).
+"""
 
 import io
 import unittest

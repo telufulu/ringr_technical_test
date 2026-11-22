@@ -3,6 +3,9 @@
 Scenario dates use 2090, which is always in the future. Tests about the
 "strictly after today" rule build their dates from ``date.today()``, so the
 results do not depend on the day the tests run.
+
+Test cases follow the conversations and rules defined in the project design.
+The test code was generated with AI (see docs/ai_usage.md).
 """
 
 import io

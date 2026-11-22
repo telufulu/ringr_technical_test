@@ -78,13 +78,13 @@ El script devuelve el código de salida 1 si falla algún test. Los tests tambi�
     python3 tests/run_simulation.py debt          # solo las de DebtAgent
     python3 tests/run_simulation.py assistance 3  # solo la conversación 3 de AssistanceAgent
 
-Cada turno muestra la pregunta del agente, la respuesta de la persona, el texto procesado, la salida del parser y lo que ha hecho el agente. Por ejemplo:
+Cada turno muestra la pregunta del agente, la respuesta de la persona, el texto procesado, la salida del parser y lo que ha hecho el agente. Por ejemplo, en la primera conversación de `DebtAgent` la persona da la fecha y el importe en un solo turno, así que el agente registra el compromiso directamente:
 
-    Turn 2
-      Agent:  ¿Qué importe quieres pagar?
-      Person: 150 euros
-      Processed text: 'Importe comprometido: 150 euros'
-      Parser: {'commitment_date': None, 'committed_amount': 150.0}
+    Turn 1
+      Agent:  ¿Qué importe y fecha quieres comprometer?
+      Person: Pagaré 150 euros el 20 de mayo de 2090
+      Processed text: 'Compromiso de 150 euros para el 20 de mayo de 2090'
+      Parser: {'commitment_date': '2090-05-20', 'committed_amount': 150.0}
       → POST https://api.ringr.debt/v1/commitment
         body: {'commitment_date': '2090-05-20', 'committed_amount': 150.0}
       Pending data: {'commitment_date': None, 'committed_amount': None}
@@ -236,7 +236,7 @@ Durante el proyecto se han usado asistentes de IA (entre ellos, Claude Code y No
 
 - Las decisiones de arquitectura y diseño son de la autora. Se definieron y documentaron antes y durante la implementación, y la IA siempre se ha guiado por ellas
 - La implementación base (`agents/`, `models/`, `integrations/` y `config.py`) la escribió la autora, con ayuda de la IA para explicar conceptos, implementaciones de referencia y revisión de código
-- Los tests, los mocks de los tests, la simulación guionizada, los scripts para ejecutar los tests y la simulación, y la documentación de `docs/` se generaron con IA. La IA ha estado siempre supervisada y guiada por las decisiones de arquitectura del proyecto, y la autora ha revisado el resultado
+- Los tests, los mocks de los tests, la simulación guionizada, los scripts para ejecutar los tests y la simulación, y la documentación de `docs/` se generaron con IA. La autora definió en el diseño los casos de prueba y las conversaciones; la IA escribió su código, siempre supervisada y guiada por las decisiones de arquitectura del proyecto, y la autora ha revisado el resultado
 
 En [docs/ai_usage.es.md](docs/ai_usage.es.md) se describe cómo se usó la IA en cada área, con ejemplos.
 

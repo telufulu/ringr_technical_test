@@ -2,6 +2,8 @@
 
 It replaces the LLM that talks to the person. Each call to ``answer_user``
 returns the next pre-scripted processed answer, in order.
+
+Generated with AI following the project design (see docs/ai_usage.md).
 """
 
 

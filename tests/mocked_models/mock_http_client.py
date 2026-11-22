@@ -1,4 +1,7 @@
-"""Simulated HTTP clients for tests that need a failed response."""
+"""Simulated HTTP clients for tests that need a failed response.
+
+Generated with AI following the project design (see docs/ai_usage.md).
+"""
 
 from typing import Any
 

@@ -42,7 +42,7 @@ class Agent(ABC):
     # Class public methods
     def handle_turn(self) -> bool:
         conversation_text = self.conversation_model.answer_user()
-        parsed_data = self.parser_model.parse_data(conversation_text)
+        parsed_data = self.parser_model.parse_data()
         self.normalize_data(parsed_data)    # Implemented by child
         
         if self.key is None:

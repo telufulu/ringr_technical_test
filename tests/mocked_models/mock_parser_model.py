@@ -6,6 +6,8 @@ received so tests can check what the agent passed to the parser.
 
 Results follow the order of the turns, not the text, because the same
 processed text may produce different parser outputs in different turns.
+
+Generated with AI following the project design (see docs/ai_usage.md).
 """
 
 from typing import Any

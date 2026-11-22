@@ -7,6 +7,8 @@ Usage, from any directory:
     python3 tests/run_simulation.py assistance 3  # only AssistanceAgent conversation 3
 
 The conversations are described in docs/scripted_conversations.md.
+
+Generated with AI following the project design (see docs/ai_usage.md).
 """
 
 import argparse

@@ -57,7 +57,7 @@ The author wrote the base implementation (`agents/`, `models/`, `integrations/`,
 
 ### 5. Tests and simulation
 
-The tests and the simulation were generated with AI, guided by the design decisions and the example conversations.
+The author defined what had to be tested: the example conversations and the rules in the design. The test and simulation code was generated with AI from them, so its implementation choices are the AI's.
 
 - Generated the unit tests, one file per component, turning each example conversation into a test and adding validation edge cases
 - Generated the test mocks: scripted conversation and parser models, and an HTTP client that answers `500` to test the failure branch

@@ -8,6 +8,8 @@ Tests are grouped by component (Agent, AssistanceAgent, DebtAgent,
 HttpClient) using the first line of each TestCase docstring, written as
 "Component · topic". Colors are disabled when the output is not a terminal
 or when the NO_COLOR environment variable is set.
+
+Generated with AI following the project design (see docs/ai_usage.md).
 """
 
 import os

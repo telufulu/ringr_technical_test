@@ -12,6 +12,9 @@ and an empty set of registered keys.
 Usage, from any directory:
 
     python3 tests/simulations/scripted_conversation.py
+
+The conversations come from the project design. The simulation code was
+generated with AI (see docs/ai_usage.md).
 """
 
 import os

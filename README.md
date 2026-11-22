@@ -78,13 +78,13 @@ The script returns exit code 1 if any test fails. The tests can also be run with
     python3 tests/run_simulation.py debt          # only the DebtAgent ones
     python3 tests/run_simulation.py assistance 3  # only AssistanceAgent conversation 3
 
-Each turn shows the agent's question, the person's reply, the processed text, the parser output and what the agent did. For example:
+Each turn shows the agent's question, the person's reply, the processed text, the parser output and what the agent did. For example, in the first `DebtAgent` conversation the person gives the date and the amount in a single turn, so the agent registers the commitment straight away:
 
-    Turn 2
-      Agent:  ¿Qué importe quieres pagar?
-      Person: 150 euros
-      Processed text: 'Importe comprometido: 150 euros'
-      Parser: {'commitment_date': None, 'committed_amount': 150.0}
+    Turn 1
+      Agent:  ¿Qué importe y fecha quieres comprometer?
+      Person: Pagaré 150 euros el 20 de mayo de 2090
+      Processed text: 'Compromiso de 150 euros para el 20 de mayo de 2090'
+      Parser: {'commitment_date': '2090-05-20', 'committed_amount': 150.0}
       → POST https://api.ringr.debt/v1/commitment
         body: {'commitment_date': '2090-05-20', 'committed_amount': 150.0}
       Pending data: {'commitment_date': None, 'committed_amount': None}
@@ -236,7 +236,7 @@ AI assistants (including Claude Code and Notion AI) were used during the project
 
 - The architecture and design decisions are the author's. They were defined and documented before and during the implementation, and AI was always guided by them
 - The base implementation (`agents/`, `models/`, `integrations/` and `config.py`) was written by the author, with AI help for explaining concepts, reference implementations and code review
-- The tests, the test mocks, the scripted simulation, the test and simulation runners, and the documentation in `docs/` were generated with AI. AI was always supervised and guided by the project's architecture decisions, and the result was reviewed by the author
+- The tests, the test mocks, the scripted simulation, the test and simulation runners, and the documentation in `docs/` were generated with AI. The author defined the test cases and conversations in the design; AI wrote the code for them, always supervised and guided by the project's architecture decisions, and the result was reviewed by the author
 
 How AI was used in each area, with examples, is described in [docs/ai_usage.md](docs/ai_usage.md).
 

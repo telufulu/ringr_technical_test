@@ -57,7 +57,7 @@ La autora escribió la implementación base (`agents/`, `models/`, `integrations
 
 ### 5. Tests y simulación
 
-Los tests y la simulación se generaron con IA, guiados por las decisiones de diseño y las conversaciones de ejemplo.
+La autora definió qué había que probar: las conversaciones de ejemplo y las reglas del diseño. El código de los tests y de la simulación se generó con IA a partir de ellas, así que sus decisiones de implementación son de la IA.
 
 - Generó los tests unitarios, un archivo por componente, convirtiendo cada conversación de ejemplo en un test y añadiendo casos límite de validación
 - Generó los mocks de los tests: modelos de conversación y de parser guionizados, y un cliente HTTP que responde `500` para probar la rama de fallo

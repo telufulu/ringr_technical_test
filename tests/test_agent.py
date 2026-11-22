@@ -2,6 +2,9 @@
 
 A minimal child agent without HTTP is used, so these tests check the base
 flow on its own and show that it does not depend on HTTP actions.
+
+Test cases follow the rules defined in the project design. The test code was
+generated with AI (see docs/ai_usage.md).
 """
 
 import io
