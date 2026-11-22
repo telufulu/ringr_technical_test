@@ -29,7 +29,7 @@ class AssistanceAgent(Agent):
         if isinstance(raw_request, str):    # Empty string is a valid request.
             self.temp_request = raw_request.lower().strip()
         elif raw_request is not None:
-            self.temp_request = None    # None means "not supplied this turn": keep the stored value.
+            self.temp_request = None
         self.key = self.temp_request
 
     def exec_action(self) -> None:
