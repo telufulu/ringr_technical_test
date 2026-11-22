@@ -123,7 +123,7 @@ class MyConversationModel:
 
 
 class MyParserModel:
-    def parse_data(self, conversation_text: str) -> dict:
+    def parse_data(self) -> dict:
         return {"commitment_date": "2090-05-20", "committed_amount": 150.0}
 
 
@@ -150,7 +150,7 @@ Ejecútalo desde la raíz del repositorio, para que se puedan importar los módu
 - **Template method.** `Agent.handle_turn` define el flujo una sola vez. Cada agente solo implementa `normalize_data`, `exec_action` y `clear_temp_data`, así que un agente nuevo no modifica los existentes.
 - **El flujo común no supone HTTP.** Una acción tiene éxito si `exec_action` termina y falla si lanza `ActionFailedError`. Solo los agentes que necesitan HTTP reciben un cliente HTTP.
 - **Contratos de los modelos como `Protocol`.** `ConversationModel` y `ParserModel` describen los métodos que necesitan los agentes. Sirve cualquier objeto con esos métodos, sin herencia. El enunciado indica que no hacen falta subclases de estos modelos.
-- **`answer_user` cubre todo el intercambio.** El modelo de conversación habla con la persona y devuelve una versión procesada y concisa de su respuesta, que el agente pasa al parser. Por eso `handle_turn` solo devuelve si la conversación puede continuar.
+- **El agente coordina los modelos, pero no pasa nada entre ellos.** El modelo de conversación habla con la persona y devuelve una versión procesada y concisa de su respuesta. El parser lee la conversación desde su propio estado: el enunciado indica que ambos modelos contienen toda la información necesaria, y `parse_data` no recibe argumentos. El agente solo usa la salida del parser. Por eso `handle_turn` solo devuelve si la conversación puede continuar.
 - **Datos entre turnos.** Un `None` del parser significa «no aportado en este turno», así que se conserva el valor guardado. Un valor nuevo inválido anula el guardado.
 - **Duplicados.** Cada agente guarda un `set` con las claves de las acciones ya registradas: `(fecha, importe)` en cobros y la solicitud normalizada en asistencia. Una clave solo se añade tras una respuesta `200`.
 - **Reglas de negocio adicionales.** El importe debe ser mayor que cero y la fecha debe ser una fecha real en formato `yyyy-mm-dd` y estrictamente posterior a hoy. El enunciado no las exige: son supuestos de esta solución.

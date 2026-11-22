@@ -59,14 +59,22 @@ class AgentTests(unittest.TestCase):
         self.assertIsNone(agent.key)
         self.assertEqual(agent.set_keys, set())
 
-    def test_conversation_answer_is_passed_to_parser(self):
-        conversation = MockConversationModel(["I will pay tomorrow"])
-        parser = MockParserModel([{"value": None}])
-        agent = RecordingAgent(conversation, parser)
+    def test_each_turn_asks_the_user_and_then_parses_the_conversation(self):
+        calls = []
 
-        agent.handle_turn()
+        class Conversation:
+            def answer_user(self) -> str:
+                calls.append("answer_user")
+                return "I will pay tomorrow"
 
-        self.assertEqual(parser.received_texts, ["I will pay tomorrow"])
+        class Parser:
+            def parse_data(self) -> dict[str, Any]:
+                calls.append("parse_data")
+                return {"value": None}
+
+        RecordingAgent(Conversation(), Parser()).handle_turn()
+
+        self.assertEqual(calls, ["answer_user", "parse_data"])
 
     def test_incomplete_data_does_not_execute_action(self):
         agent = make_agent([{"value": None}])

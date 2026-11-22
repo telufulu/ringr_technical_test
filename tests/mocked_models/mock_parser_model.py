@@ -1,11 +1,10 @@
 """Simulated parser model for tests.
 
-It replaces the LLM that extracts structured data. Each call to ``parse_data``
-returns the next pre-defined result, in order, and records the text it
-received so tests can check what the agent passed to the parser.
-
-Results follow the order of the turns, not the text, because the same
-processed text may produce different parser outputs in different turns.
+It replaces the LLM that extracts structured data from the conversation. Like
+the real parser, it receives nothing from the agent: it reads the conversation
+from its own state. Here that state is a list of pre-defined results, and each
+call to ``parse_data`` returns the next one, in turn order. This keeps it in
+step with the conversation model, which also advances one answer per turn.
 
 Generated with AI following the project design (see docs/ai_usage.md).
 """
@@ -22,12 +21,12 @@ class MockParserModel:
 
     def __init__(self, results: list[dict[str, Any]]) -> None:
         self.results = [dict(result) for result in results]
-        self.received_texts: list[str] = []
+        self.calls = 0
 
-    def parse_data(self, conversation_text: str) -> dict[str, Any]:
-        turn = len(self.received_texts)
-        if turn >= len(self.results):
+    def parse_data(self) -> dict[str, Any]:
+        if self.calls >= len(self.results):
             raise RuntimeError("MockParserModel has no more scripted results")
-        self.received_texts.append(conversation_text)
+        result = self.results[self.calls]
+        self.calls += 1
         # A copy, so the agent cannot change the scripted results.
-        return dict(self.results[turn])
+        return dict(result)

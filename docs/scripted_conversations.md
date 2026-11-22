@@ -31,7 +31,7 @@ It requires Python 3.10 or later and has no external dependencies.
 | `Agent` | Question the conversation model asks the person |
 | `Person` | What the person replies |
 | `Processed text` | Processed version of the reply that `answer_user` returns to the agent |
-| `Parser` | Dictionary that `parse_data` returns from that text |
+| `Parser` | Dictionary that `parse_data` returns for that turn. The parser reads the conversation from its own state: the agent does not pass it the processed text |
 | `→ POST ...` / `→ No request sent` | Whether the agent sent a simulated request, with its URL and body |
 | `Pending data` | Temporary data the agent keeps for the next turns |
 | `Registered keys` | Keys of the actions already registered successfully in the conversation |
@@ -153,7 +153,7 @@ The assistance agent registers requests for human agents. It accepts any text in
 - In turn 2 the parser returns the same request in upper case and with spaces at both ends. After normalization the key matches, so it is a duplicate
 - No new POST is sent. One is sent in total
 
-The processed text is the same in both turns, but the parser returns different results. This is why the simulated parser returns its results by turn order and not based on the text it receives.
+The processed text is the same in both turns, but the parser returns different results. The parser does not depend on the processed text: the simulated parser returns its results by turn order.
 
 ### 4. Empty string and another request
 

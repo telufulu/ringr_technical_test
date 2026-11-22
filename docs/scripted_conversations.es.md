@@ -29,7 +29,7 @@ Requiere Python 3.10 o superior y no necesita dependencias externas.
 | `Agent` | Pregunta que el modelo de conversación hace a la persona |
 | `Person` | Lo que responde la persona |
 | `Processed text` | Versión procesada de la respuesta que `answer_user` devuelve al agente |
-| `Parser` | Diccionario que devuelve `parse_data` a partir de ese texto |
+| `Parser` | Diccionario que devuelve `parse_data` en ese turno. El parser lee la conversación desde su propio estado: el agente no le pasa el texto procesado |
 | `→ POST ...` / `→ No request sent` | Si el agente ha enviado una petición simulada, con su URL y su cuerpo |
 | `Pending data` | Datos temporales que el agente conserva para los turnos siguientes |
 | `Registered keys` | Claves de las acciones ya registradas con éxito en la conversación |
@@ -151,7 +151,7 @@ El agente de atención al cliente registra solicitudes para agentes humanos. Ace
 - En el turno 2, el parser devuelve la misma solicitud en mayúsculas y con espacios en los extremos. Tras normalizar, la clave coincide, así que es un duplicado
 - No se envía otro POST. En total se envía uno
 
-El texto procesado es el mismo en los dos turnos, pero el parser devuelve resultados distintos. Por eso el parser simulado devuelve sus resultados por orden de turno y no según el texto que recibe.
+El texto procesado es el mismo en los dos turnos, pero el parser devuelve resultados distintos. El parser no depende del texto procesado: el parser simulado devuelve sus resultados por orden de turno.
 
 ### 4. Cadena vacía y otra solicitud
 

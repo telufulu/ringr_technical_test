@@ -72,8 +72,8 @@ class ScriptedConversationModel(MockConversationModel):
 class PrintingParserModel(MockParserModel):
     """Prints the scripted parser output before returning it."""
 
-    def parse_data(self, conversation_text: str) -> dict[str, Any]:
-        parsed_data = super().parse_data(conversation_text)
+    def parse_data(self) -> dict[str, Any]:
+        parsed_data = super().parse_data()
         print(paint(f"  Parser: {parsed_data}", YELLOW))
         return parsed_data
 

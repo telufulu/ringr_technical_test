@@ -123,7 +123,7 @@ class MyConversationModel:
 
 
 class MyParserModel:
-    def parse_data(self, conversation_text: str) -> dict:
+    def parse_data(self) -> dict:
         return {"commitment_date": "2090-05-20", "committed_amount": 150.0}
 
 
@@ -150,7 +150,7 @@ Run it from the repository root, so the `agents`, `models`, `integrations` and `
 - **Template method.** `Agent.handle_turn` defines the flow once. Each agent only implements `normalize_data`, `exec_action` and `clear_temp_data`, so a new agent does not change the existing ones.
 - **The shared flow does not assume HTTP.** An action succeeds if `exec_action` returns and fails if it raises `ActionFailedError`. Only the agents that need HTTP receive an HTTP client.
 - **Model contracts as `Protocol`.** `ConversationModel` and `ParserModel` describe the methods the agents need. Any object with those methods works, without inheritance. The brief says no subclasses of these models are needed.
-- **`answer_user` covers the whole exchange.** The conversation model talks to the person and returns a processed, concise version of their answer, which the agent passes to the parser. For this reason `handle_turn` only returns whether the conversation can continue.
+- **The agent coordinates the models but passes nothing between them.** The conversation model talks to the person and returns a processed, concise version of their answer. The parser reads the conversation from its own state: the brief says both models hold all the information they need, and `parse_data` takes no arguments. The agent only uses the parser output. For this reason `handle_turn` only returns whether the conversation can continue.
 - **Data across turns.** `None` from the parser means "not supplied in this turn", so the stored value is kept. A new invalid value clears the stored one.
 - **Duplicates.** Each agent keeps a `set` of the keys of the actions already registered: `(date, amount)` for debts and the normalized request for assistance. A key is added only after a `200` response.
 - **Extra business rules.** The amount must be greater than zero and the date must be a real `yyyy-mm-dd` date strictly after today. The brief does not require them: they are assumptions of this solution.
